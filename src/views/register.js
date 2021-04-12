@@ -51,11 +51,11 @@ export async function registerPage(ctx) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
-    let username = formData.get('username');
-    let email = formData.get('email');
-    let password = formData.get('password');
-    let repeatPass = formData.get('repeatPass');
-    let gender = formData.get('gender');
+    let username = formData.get('username').trim();
+    let email = formData.get('email').trim();
+    let password = formData.get('password').trim();
+    let repeatPass = formData.get('repeatPass').trim();
+    let gender = formData.get('gender').trim();
 
     if (!username || !email || !password || !repeatPass || !gender) {
       return alert('All field are required!');

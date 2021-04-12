@@ -14,3 +14,7 @@ export async function getMemes() {
 export async function createMeme(body) {
   await api.post(host + '/data/memes', body);
 }
+
+export async function getMemeById(id){
+  return await api.get(host + '/data/memes/'+ id);
+}

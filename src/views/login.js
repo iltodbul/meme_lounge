@@ -31,8 +31,8 @@ export async function loginPage(ctx) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
-    let email = formData.get('email');
-    let password = formData.get('password');
+    let email = formData.get('email').trim();
+    let password = formData.get('password').trim();
 
     await login(email, password);
 

@@ -28,22 +28,26 @@ const memeTemplate = (onSubmit) => html`
   </section>
 `;
 
-export async function createPage(ctx){
+export async function createPage(ctx) {
   ctx.render(memeTemplate(onSubmit));
 
-  async function onSubmit(event){
+  async function onSubmit(event) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
-    let title = formData.get('title');
-    let description = formData.get('description');
-    let imageUrl = formData.get('imageUrl');
+    let title = formData.get('title').trim();
+    let description = formData.get('description').trim();
+    let imageUrl = formData.get('imageUrl').trim();
+
+    if (!title || !description || !imageUrl) {
+      return alert('All fields are required!');
+    }
 
     let body = {
       title,
       description,
-      imageUrl
-    }
+      imageUrl,
+    };
 
     await createMeme(body);
     ctx.page.redirect('/catalog');
