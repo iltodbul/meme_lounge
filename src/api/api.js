@@ -63,9 +63,11 @@ async function login(email, password) {
     password,
   });
 
+  sessionStorage.setItem('username', result.username);
   sessionStorage.setItem('email', result.email);
   sessionStorage.setItem('authToken', result.accessToken);
   sessionStorage.setItem('userId', result._id);
+  sessionStorage.setItem('userGender', result.gender);
 
   return result;
 }
@@ -78,10 +80,11 @@ async function register(username, email, password, gender) {
     gender,
   });
 
+  sessionStorage.setItem('username', result.username);
   sessionStorage.setItem('email', result.email);
   sessionStorage.setItem('authToken', result.accessToken);
   sessionStorage.setItem('userId', result._id);
-  sessionStorage.getItem('userGender', result.gender);
+  sessionStorage.setItem('userGender', result.gender);
 
   return result;
 }
@@ -89,9 +92,11 @@ async function register(username, email, password, gender) {
 async function logout() {
   const result = await get(settings.host + '/users/logout');
 
+  sessionStorage.removeItem('username');
   sessionStorage.removeItem('email');
   sessionStorage.removeItem('authToken');
   sessionStorage.removeItem('userId');
+  sessionStorage.removeItem('userGender');
 
   return result;
 }

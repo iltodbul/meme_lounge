@@ -8,6 +8,7 @@ import { detailsPage } from './views/details.js';
 import { editPage } from './views/edit.js';
 import { homePage } from './views/home.js';
 import { loginPage } from './views/login.js';
+import { profilePage } from './views/profile.js';
 import { registerPage } from './views/register.js';
 
 const main = document.querySelector('main');
@@ -21,6 +22,7 @@ page('/catalog', decorateContext, catalogPage);
 page('/create', decorateContext, createPage);
 page('/details/:id', decorateContext, detailsPage);
 page('/edit/:id', decorateContext, editPage);
+page('/profile', decorateContext, profilePage);
 
 page.start();
 

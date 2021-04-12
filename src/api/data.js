@@ -15,14 +15,22 @@ export async function createMeme(body) {
   await api.post(host + '/data/memes', body);
 }
 
-export async function getMemeById(id){
-  return await api.get(host + '/data/memes/'+ id);
+export async function getMemeById(id) {
+  return await api.get(host + '/data/memes/' + id);
 }
 
-export async function editMeme(id, body){
-  return await api.put(host + '/data/memes/' + id, body)
+export async function editMeme(id, body) {
+  return await api.put(host + '/data/memes/' + id, body);
 }
 
-export async function deleteMeme(id){
-  return await api.del(host + '/data/memes/'+ id);
+export async function deleteMeme(id) {
+  return await api.del(host + '/data/memes/' + id);
+}
+
+export async function getMyMemes() {
+  let userId = sessionStorage.getItem('userId');
+  return await api.get(
+    host +
+      `/data/memes?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`
+  );
 }
