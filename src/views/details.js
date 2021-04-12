@@ -1,8 +1,8 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 
-import { getMemeById } from '../api/data.js';
+import { getMemeById, deleteMeme } from '../api/data.js';
 
-const memeTemplate = (meme, isOwner) => html`
+const memeTemplate = (meme, isOwner, onDelete) => html`
   <section id="meme-details">
     <h1>Meme Title: ${meme.title}</h1>
     <div class="meme-details">
@@ -16,7 +16,7 @@ const memeTemplate = (meme, isOwner) => html`
         <!-- Buttons Edit/Delete should be displayed only for creator of this meme  -->
         ${isOwner
           ? html`<a class="button warning" href="/edit/${meme._id}">Edit</a>
-              <button class="button danger">Delete</button>`
+              <button @click=${onDelete} class="button danger">Delete</button>`
           : ''}
       </div>
     </div>
@@ -29,5 +29,13 @@ export async function detailsPage(ctx) {
   let meme = await getMemeById(memeId);
 
   let isOwner = userId === meme._ownerId;
-  ctx.render(memeTemplate(meme, isOwner));
+  ctx.render(memeTemplate(meme, isOwner, onDelete));
+
+  async function onDelete() {
+    let confirmed = confirm('Are you sure!?');
+    if (confirmed) {
+      await deleteMeme(memeId);
+      ctx.page.redirect('/catalog');
+    }
+  }
 }
