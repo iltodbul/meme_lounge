@@ -75,12 +75,13 @@ async function register(username, email, password, gender) {
     username,
     email,
     password,
-    gender
+    gender,
   });
 
   sessionStorage.setItem('email', result.email);
   sessionStorage.setItem('authToken', result.accessToken);
   sessionStorage.setItem('userId', result._id);
+  sessionStorage.getItem('userGender', result.gender);
 
   return result;
 }
