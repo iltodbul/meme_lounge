@@ -256,7 +256,7 @@ describe('E2E tests', function () {
     });
   });
 
-  describe.only('Catalog [ 25 Points ]', () => {
+  describe('Catalog [ 25 Points ]', () => {
     it('loads static home page [ 5 Points ]', async () => {
       await page.goto(host);
 
