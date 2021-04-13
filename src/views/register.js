@@ -56,7 +56,7 @@ export async function registerPage(ctx) {
     let email = formData.get('email').trim();
     let password = formData.get('password').trim();
     let repeatPass = formData.get('repeatPass').trim();
-    let gender = formData.get('gender').trim();
+    let gender = formData.get('gender');
 
     try {
       if (!username || !email || !password || !repeatPass || !gender) {
